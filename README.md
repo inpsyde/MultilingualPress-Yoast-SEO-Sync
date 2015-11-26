@@ -1,6 +1,6 @@
 # MultilingualPress Add on to Sync Yoast SEO Postmeta
 
-Sync post meta data for Yoast SEO.
+Sync post meta data for the Yoast SEO plugin.
 
 ## Description
 This is a simple add-on for the [MultilingualPress](multilingualpress.pro) plugin to sync post meta data for the Yoast SEO plugin.
