@@ -4,9 +4,9 @@ Sync post meta data for the Yoast SEO plugin.
 
 ## Description
 This is a simple add-on for the [MultilingualPress](multilingualpress.pro) plugin to sync post meta data for the Yoast SEO plugin.
-It use the help of the API of MultilingualPress to sync about the Multisite network for new posts.
+It uses the API of MultilingualPress to sync the Multisite network for new posts
 
-## Installation and prerequisites
+## Installation and Requirements
 
 ### Requirements
 * WordPress Multisite 4.0+.
