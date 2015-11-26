@@ -2,7 +2,7 @@
 
 namespace MultilingualPressAddonYoastSEO\SyncPostmeta;
 
-require_once( __DIR__ . 'SyncPostmeta.php' );
+require_once( __DIR__ . '/SyncPostmeta.php' );
 
 /**
  * Initialize the plugin main object.
