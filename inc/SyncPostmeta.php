@@ -1,14 +1,19 @@
 <?php # -*- coding: utf-8 -*-
 
-namespace Home24\SyncPostmeta;
+namespace MultilingualPressAddonYoastSEO\SyncPostmeta;
 
+/**
+ * Class SyncPostmeta
+ *
+ * @package MLPAddonYoastSEO\SyncPostmeta
+ */
 class SyncPostmeta {
 
 	/**
-	 * @var Store MLP Source Data
+	 * Static string to identifier.
+	 *
+	 * @var string
 	 */
-	private $source_data;
-
 	private $name_base = 'mlp_translation_data';
 
 	/**
@@ -16,46 +21,61 @@ class SyncPostmeta {
 	 */
 	private $flag_option_key = 'copy_source_used';
 
+	/**
+	 * Save translation data.
+	 *
+	 * @var string
+	 */
 	private $post_request_data;
 
+	/**
+	 * The current blog ID.
+	 *
+	 * @var int
+	 */
 	private $current_blog_id;
 
 	/**
+	 * Excluded post types.
+	 *
 	 * @var array
 	 */
 	private $excluded_post_types = array(
 		'attachment',
-		'revision'
+		'revision',
 	);
 
 	/**
+	 * Store blog IDs, there should be synced.
+	 *
 	 * @var array
 	 */
 	private $blogs_to_translate = array();
 
+	/**
+	 * SyncPostmeta constructor.
+	 */
 	public function __construct() {
 
 		$this->current_blog_id = get_current_blog_id();
 
+		/**
+		 * Use this filter to change the post types to sync.
+		 */
+		$this->excluded_post_types = apply_filters( 'Mlp_Addon_Yoast_Seo_Post_Type', $this->excluded_post_types );
 	}
 
 	/**
+	 * Run the plugin in the WordPress environment.
+	 *
 	 * @wp-hook save_post
 	 */
 	public function run() {
 
-		/**
-		 * Add a fallback 'copy source button' flag if the translate attachment plugin is not running
-		 */
-		if ( ! \is_plugin_active( 'home24-translate-attachments/home24-translate-attachments.php' ) ) {
-			add_action( 'mlp_translation_meta_box_top', array( $this, 'add_button_flag' ), 10, 3 );
-			add_action( 'admin_footer', array( $this, 'add_copy_button_js' ) );
-		}
-
 		add_action( 'wp_insert_post', array( $this, 'wp_insert_post' ), 10, 3 );
 
 		/**
-		 * Grab the relevant translation data if it exists
+		 * Grab the relevant translation data if it exists.
 		 */
 		if ( 'POST' === $_SERVER[ 'REQUEST_METHOD' ] ) {
 			$this->post_request_data = $_POST;
@@ -63,7 +83,7 @@ class SyncPostmeta {
 			if ( isset( $this->post_request_data[ $this->name_base ] ) ) {
 				foreach ( $this->post_request_data[ $this->name_base ] as $remote_blog_id => $post_data ) {
 
-					if ( $post_data[ $this->flag_option_key ] == '1' ) {
+					if ( $post_data[ $this->flag_option_key ] === '1' ) {
 						$this->blogs_to_translate[] = $remote_blog_id;
 					}
 				}
@@ -73,7 +93,7 @@ class SyncPostmeta {
 	}
 
 	/**
-	 * Contains the post saving logic to transfer post meta and categories
+	 * Contains the post saving logic to transfer post meta and categories.
 	 *
 	 * @wp-hook wp_insert_post
 	 *
@@ -104,7 +124,7 @@ class SyncPostmeta {
 		}
 
 		foreach ( $linked_posts as $blog_ID => $remote_post_ID ) {
-			if ( $remote_post_ID == $this->current_blog_id ) {
+			if ( $remote_post_ID === $this->current_blog_id ) {
 				continue;
 			}
 
@@ -142,7 +162,7 @@ class SyncPostmeta {
 
 	/**
 	 * For post meta that only contains a single post id, this method will check for linked elements and set the remote
-	 * post meta accordingly
+	 * post meta accordingly.
 	 *
 	 * @param $source_blog_id
 	 * @param $source_post_id
@@ -160,7 +180,7 @@ class SyncPostmeta {
 		$meta = array(
 			'_thumbnail_id'                   => 'post',
 			'post_preview_image_thumbnail_id' => 'post',
-			'_h24_primary_category'           => 'term'
+			'_h24_primary_category'           => 'term',
 		);
 
 		foreach ( $meta as $key => $type ) {
@@ -183,7 +203,7 @@ class SyncPostmeta {
 	}
 
 	/**
-	 * Transfer meta data from one post/blog to another
+	 * Transfer meta data from one post/blog to another.
 	 *
 	 * @param $source_blog_id
 	 * @param $source_post_id
@@ -201,13 +221,11 @@ class SyncPostmeta {
 		$source_meta = get_post_meta( $source_post_id );
 
 		/**
-		 * Should we decide to reuse this code, this would have to be filterable
+		 * Our current meta keys, there we sync on default.
+		 *
+		 * @see https://github.com/Yoast/wordpress-seo/blob/trunk/inc/class-wpseo-meta.php
 		 */
 		$sync_meta_keys = array(
-			'_h24_vertical_sku_list',
-			'_h24_horizontal_sku_list',
-			'_h24_vertical_list_number',
-			'_h24_horizontal_list_number',
 			'_yoast_wpseo_focuskw',
 			'_yoast_wpseo_title',
 			'_yoast_wpseo_metadesc',
@@ -219,6 +237,11 @@ class SyncPostmeta {
 			'_yoast_wpseo_sitemap-prio',
 			'_yoast_wpseo_redirect',
 		);
+
+		/**
+		 * Use this filter to change, enhance the meta keys.
+		 */
+		$sync_meta_keys = apply_filters( 'Mlp_Addon_Yoast_Seo_Meta_Keys', $sync_meta_keys );
 
 		switch_to_blog( $target_blog_id );
 		/**
@@ -290,7 +313,12 @@ class SyncPostmeta {
 		}
 
 		$allowed_taxonomies = array( 'category' );
-		$tax_and_terms      = array();
+		/**
+		 * Use this filter to change, enhance the taxonomies for synchronisation.
+		 */
+		$allowed_taxonomies = apply_filters( 'Mlp_Addon_Yoast_Seo_Taxonomy', $allowed_taxonomies );
+
+		$tax_and_terms = array();
 		foreach ( $allowed_taxonomies as $tax ) {
 			$tax_and_terms[ $tax ] = $this->get_linked_terms( $source_post_id, $tax );
 		}
@@ -313,42 +341,6 @@ class SyncPostmeta {
 
 		switch_to_blog( $original_blog_id );
 
-	}
-
-	/**
-	 * Adds a hidden input that we can use to determine if the "Copy Source" button has been pressed
-	 *
-	 * @param $post
-	 * @param $remote_blog_id
-	 * @param $remote_post
-	 */
-	public function add_button_flag( $post, $remote_blog_id, $remote_post ) {
-
-		?>
-		<input
-			class="h24_copy_source_flag"
-			name="<?php echo $this->name_base ?>[<?php echo $remote_blog_id ?>][<?php echo $this->flag_option_key ?>]"
-			type="hidden"
-			value="0"
-			>
-		<?php
-	}
-
-	public function add_copy_button_js() {
-
-		?>
-		<script>
-			jQuery( document ).ready( function( $ ) {
-
-				$( '.mlp_copy_button' ).on( 'click', function( e ) {
-					var $this = $( this );
-					var blogId = $this.data( 'blog_id' );
-					$( 'input[name="mlp_translation_data[' + blogId + '][copy_source_used]"]' ).val( '1' );
-				} );
-
-			} );
-		</script>
-		<?php
 	}
 
 }

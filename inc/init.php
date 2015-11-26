@@ -1,28 +1,18 @@
 <?php # -*- coding: utf-8 -*-
 
-namespace Home24\SyncPostmeta;
+namespace MultilingualPressAddonYoastSEO\SyncPostmeta;
 
-use Requisite;
+require_once( __DIR__ . 'SyncPostmeta.php' );
 
 /**
- * setup the autoloading and initialize the plugin main object
- *
- * @param Requisite\SPLAutoLoader $requisite
- *
- * @wp-hook shared_autoloader_init
+ * Initialize the plugin main object.
  */
-function init( Requisite\SPLAutoLoader $requisite ) {
+function init() {
 
 	if ( ! is_admin() || ! class_exists( 'Multilingual_Press' ) ) {
 		return;
 	}
 
-	/** Todo: rethink this static binding on the directory/file  */
-	$dir = dirname( __DIR__ );
-
-	register_autoloading( $dir, $requisite );
-
 	$plugin = new SyncPostmeta;
 	add_action( 'admin_init', array( $plugin, 'run' ) );
-
 }
