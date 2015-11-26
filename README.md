@@ -25,7 +25,7 @@ It use the help of the API of MultilingualPress to sync about the Multisite netw
 Have a look at the premium plugins in our [market](http://marketpress.com).
 
 ### Bugs, technical hints or contribute
-Please give me feedback, contribute and file technical bugs on this 
+Please give us feedback, contribute and file technical bugs on this 
 [GitHub Repo](https://github.com/inpsyde/MultilingualPress-Addon-Yoast-SEO/issues), use Issues.
 
 ### License
