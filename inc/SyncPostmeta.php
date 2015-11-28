@@ -1,6 +1,6 @@
 <?php # -*- coding: utf-8 -*-
 
-namespace MultilingualPressAddonYoastSEO\SyncPostmeta;
+namespace MultilingualpressYoastSeoSync\SyncPostmeta;
 
 /**
  * Class SyncPostmeta
@@ -15,11 +15,6 @@ class SyncPostmeta {
 	 * @var string
 	 */
 	private $name_base = 'mlp_translation_data';
-
-	/**
-	 * @var string
-	 */
-	private $flag_option_key = 'copy_source_used';
 
 	/**
 	 * Save translation data.
@@ -62,7 +57,7 @@ class SyncPostmeta {
 		/**
 		 * Use this filter to change the post types to sync.
 		 */
-		$this->excluded_post_types = apply_filters( 'Mlp_Addon_Yoast_Seo_Post_Type', $this->excluded_post_types );
+		$this->excluded_post_types = apply_filters( 'Mlp_Addon_Yoast_Seo_Excluded_Post_Types', $this->excluded_post_types );
 	}
 
 	/**
@@ -83,9 +78,7 @@ class SyncPostmeta {
 			if ( isset( $this->post_request_data[ $this->name_base ] ) ) {
 				foreach ( $this->post_request_data[ $this->name_base ] as $remote_blog_id => $post_data ) {
 
-					if ( $post_data[ $this->flag_option_key ] === '1' ) {
-						$this->blogs_to_translate[] = $remote_blog_id;
-					}
+					$this->blogs_to_translate[] = $remote_blog_id;
 				}
 			}
 		}
@@ -316,7 +309,7 @@ class SyncPostmeta {
 		/**
 		 * Use this filter to change, enhance the taxonomies for synchronisation.
 		 */
-		$allowed_taxonomies = apply_filters( 'Mlp_Addon_Yoast_Seo_Taxonomy', $allowed_taxonomies );
+		$allowed_taxonomies = apply_filters( 'Mlp_Addon_Yoast_Seo_Taxonomies', $allowed_taxonomies );
 
 		$tax_and_terms = array();
 		foreach ( $allowed_taxonomies as $tax ) {

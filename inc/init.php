@@ -1,6 +1,6 @@
 <?php # -*- coding: utf-8 -*-
 
-namespace MultilingualPressAddonYoastSEO\SyncPostmeta;
+namespace MultilingualpressYoastSeoSync\SyncPostmeta;
 
 require_once( __DIR__ . '/SyncPostmeta.php' );
 
