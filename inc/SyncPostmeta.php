@@ -1,11 +1,11 @@
 <?php # -*- coding: utf-8 -*-
 
-namespace MultilingualpressYoastSeoSync\SyncPostmeta;
+namespace Multilingualpress\YoastSeoSync;
 
 /**
  * Class SyncPostmeta
  *
- * @package MLPAddonYoastSEO\SyncPostmeta
+ * @package Multilingualpress\YoastSeoSync
  */
 class SyncPostmeta {
 
