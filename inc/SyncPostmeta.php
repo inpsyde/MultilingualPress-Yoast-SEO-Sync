@@ -254,6 +254,7 @@ class SyncPostmeta {
 	}
 
 	/**
+	 * @todo Move to extra class, separate from postmeta sync.
 	 * Collects all linked terms for a given taxonomy. The resulting array has the following structure:
 	 *
 	 * array(
@@ -290,6 +291,7 @@ class SyncPostmeta {
 	}
 
 	/**
+	 * @todo Move to extra class, separate from postmeta sync.
 	 * Transfer terms from one post/blog to another
 	 *
 	 * @param $source_blog_id
