@@ -1,37 +1,29 @@
-# MultilingualPress Add on to Sync Yoast SEO Postmeta
+# MultilingualPress Yoast SEO Sync
 
-Sync post meta data for the Yoast SEO plugin.
 
 ## Description
-This is a simple add-on for the [MultilingualPress](multilingualpress.pro) plugin to sync post meta data for the Yoast SEO plugin.
-It uses the API of MultilingualPress to sync the Multisite network for new posts
+This is a simple add-on for the [MultilingualPress](http://multilingualpress.pro) plugin to synchronize the post
+metadata of the Yoast SEO plugin between translated posts.
 
-## Installation and Requirements
+## Installation
 
 ### Requirements
-* WordPress Multisite 4.0+.
-* [MultilingualPress](https://wordpress.org/plugins/multilingual-press/) plugin
-* [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/) plugin
-* PHP 5.4.0, newer PHP versions will work faster.
+* WordPress multisite 4.0+;
+* [MultilingualPress](https://wordpress.org/plugins/multilingual-press/);
+* [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/);
+* PHP 5.3.0 (newer PHP versions will work faster).
 
 ### Installation
 1. Unpack the download-package.
 2. Upload the files to the `/wp-content/plugins/` directory.
 3. Activate the plugin through the **Network/Plugins** menu in WordPress and click **Network Activate**.
 
-## Other Notes
+## Crafted by [Inpsyde](http://inpsyde.com) · Engineering the Web since 2006.
+Yes, we also run that [marketplace for premium WordPress plugins and themes](https://marketpress.com).
 
-### Made by [Inpsyde](http://inpsyde.com) &middot; We love WordPress
-Have a look at the premium plugins in our [market](http://marketpress.com).
+## License
+Good news, this plugin is free for everyone! Since it's released under [GPLv3](LICENSE), you can use it free of charge
+on your personal or commercial website.
 
-### Bugs, technical hints or contribute
-Please give us feedback, contribute and file technical bugs on this 
-[GitHub Repo](https://github.com/inpsyde/MultilingualPress-Addon-Yoast-SEO/issues), use Issues.
-
-### License
-Good news, this plugin is free for everyone! Since it's released under the GPL, 
-you can use it free of charge on your personal or commercial blog.
-
-### Contact & Feedback
-Please let us know if you like the plugin or you hate it or whatever ... 
-Please fork it, add an issue for ideas and bugs.
+## Changelog
+[Changelog](CHANGELOG.md)
