@@ -104,6 +104,9 @@ class Synchronizer {
 		}
 
 		$source_metadata = $this->get_metadata_for_synchronization( $post_id );
+		if ( ! $source_metadata ) {
+			return false;
+		}
 
 		foreach ( $linked_posts as $remote_site_id => $remote_post_id ) {
 			if ( $remote_post_id === $this->current_site_id ) {
