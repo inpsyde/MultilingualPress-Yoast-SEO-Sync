@@ -18,8 +18,7 @@ metadata of the Yoast SEO plugin between translated posts.
 2. Upload the files to the `/wp-content/plugins/` directory.
 3. Activate the plugin through the **Network/Plugins** menu in WordPress and click **Network Activate**.
 
-## Crafted by [Inpsyde](http://inpsyde.com) · Engineering the Web since 2006.
-Yes, we also run that [marketplace for premium WordPress plugins and themes](https://marketpress.com).
+## Crafted by [Inpsyde](https://inpsyde.com) · Engineering the Web since 2006.
 
 ## License
 Good news, this plugin is free for everyone! Since it's released under [GPLv3](LICENSE), you can use it free of charge
