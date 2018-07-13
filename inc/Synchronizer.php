@@ -175,13 +175,20 @@ class Synchronizer {
 	 *
 	 * @param int $post_id Post ID.
 	 *
-	 * @return array
+	 * @return array Key value pairs array where key is meta_key and value is meta_value.
 	 */
 	private function get_metadata_for_synchronization( $post_id ) {
 
 		$metadata = get_post_meta( $post_id, '', true );
-		$metadata = array_intersect_key( $metadata, $this->meta_keys );
+		$metadata = array_intersect_key( $metadata, array_flip($this->meta_keys) );
 
-		return $metadata;
+		$keyValueMeta = [];
+        foreach ($metadata as $meta => $value) {
+            if( in_array( $meta, $this->meta_keys) ) {
+                $keyValueMeta[$meta] = $value[0];
+            }
+        }
+
+		return $keyValueMeta;
 	}
 }
