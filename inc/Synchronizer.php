@@ -89,7 +89,7 @@ class Synchronizer {
 	 */
 	public function synchronize( $post_id, \WP_Post $post ) {
 
-		if ( in_array( $post->post_type, $this->excluded_post_types ) ) {
+    		if ( in_array( $post->post_type, $this->excluded_post_types ) ) {
 			return false;
 		}
 
@@ -109,7 +109,7 @@ class Synchronizer {
 		}
 
 		foreach ( $linked_posts as $remote_site_id => $remote_post_id ) {
-			if ( $remote_post_id === $this->current_site_id ) {
+			if ( $remote_site_id === $this->current_site_id ) {
 				continue;
 			}
 
