@@ -4,8 +4,8 @@
  * Plugin URI:  https://github.com/inpsyde/multilingualpress-yoast-seo-sync
  * Description: This is a simple add-on for the MultilingualPress plugin to synchronize the post metadata of the Yoast SEO plugin between translated posts.
  * Author:      Inpsyde GmbH
- * Author URI:  http://inpsyde.com/
- * Version:     1.0.0
+ * Author URI:  https://inpsyde.com/
+ * Version:     1.0.1
  * Licence:     GPLv3
  * Network:     true
  */
