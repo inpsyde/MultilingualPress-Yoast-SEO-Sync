@@ -1,33 +1,90 @@
-<?php # -*- coding: utf-8 -*-
-/**
+<?php // phpcs:disable
+/*
  * Plugin Name: MultilingualPress Yoast SEO Sync
- * Plugin URI:  https://github.com/inpsyde/multilingualpress-yoast-seo-sync
- * Description: This is a simple add-on for the MultilingualPress plugin to synchronize the post metadata of the Yoast SEO plugin between translated posts.
- * Author:      Inpsyde GmbH
- * Author URI:  https://inpsyde.com/
- * Version:     1.0.1
- * Licence:     GPLv3
- * Network:     true
+ * Plugin URI:
+ * Description: Translate Yoast SEO post metadata between translated posts.
+ * Author: Inpsyde GmbH
+ * Author URI: https://inpsyde.com
+ * Version: 1.0.0
+ * Text Domain: multilingualpress-yoast-seo-sync
+ * Domain Path: /languages/
+ * License: GPLv2+
+ * Network: true
+ * Requires at least: 4.8
+ * Requires PHP: 7.0
  */
 
-namespace MultilingualPressYoastSEOSync;
+namespace Inpsyde\MultilingualPress\YoastSeoSync;
 
-if ( ! function_exists( 'add_action' ) ) {
-	return;
+use Inpsyde\MultilingualPress\Framework\Service\ServiceProvidersCollection;
+
+if (version_compare(PHP_VERSION, '7', '<')) {
+    $hooks = [
+        'admin_notices',
+        'network_admin_notices',
+    ];
+    foreach ($hooks as $hook) {
+        add_action($hook, function () {
+            $message = __(
+                'MultilingualPress Yoast SEO Sync requires at least PHP version 7. <br />Please ask your server administrator to update your environment to PHP version 7.',
+                'multilingualpress-yoast-seo-sync'
+            );
+
+            printf(
+                '<div class="notice notice-error"><span class="notice-title">%1$s</span><p>%2$s</p></div>',
+                esc_html__(
+                    'The plugin MultilingualPress Yoast SEO Sync has been deactivated',
+                    'multilingualpress-yoast-seo-sync'
+                ),
+                wp_kses($message, ['br' => true])
+            );
+
+            deactivate_plugins(plugin_basename(__FILE__));
+        });
+    }
+    return;
 }
 
-add_action( 'mlp_and_wp_loaded', __NAMESPACE__ . '\initialize' );
+function autoload()
+{
+    static $done;
+    if (is_bool($done)) {
+        return $done;
+    }
+    if (is_readable(__DIR__ . '/autoload.php')) {
+        require_once __DIR__ . '/autoload.php';
+        $done = true;
+
+        return true;
+    }
+    if (is_readable(__DIR__ . '/vendor/autoload.php')) {
+        require_once __DIR__ . '/vendor/autoload.php';
+        $done = true;
+
+        return true;
+    }
+    $done = false;
+
+    return false;
+}
+
+if (!autoload()) {
+    return;
+}
 
 /**
- * Initializes the plugin.
+ * Bootstraps MultilingualPress Yoast SEO Sync.
  *
- * @wp-hook mlp_and_wp_loaded
+ * @return bool
  *
- * @return void
+ * @wp-hook multilingualpress.add_service_providers
  */
-function initialize() {
-
-	require_once __DIR__ . '/inc/Synchronizer.php';
-
-	add_action( 'wp_insert_post', array( new Synchronizer(), 'synchronize' ), 10, 2 );
-}
+add_action(
+    'multilingualpress.add_service_providers',
+    function (ServiceProvidersCollection $providers) {
+        $providers
+            ->add(new Core\ServiceProvider())
+            ->add(new TranslationUi\ServiceProvider());
+    },
+    0
+);

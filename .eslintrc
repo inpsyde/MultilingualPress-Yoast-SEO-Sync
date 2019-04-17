@@ -1,0 +1,19 @@
+{
+    "extends": "inpsyde/es5",
+    "rules": {
+        "func-names": "off",
+        "func-style": "off",
+        "max-statements": "off",
+        "max-params": "off",
+        "no-invalid-this": "off",
+        "padded-blocks": "off",
+        "yoda": "off",
+        "valid-jsdoc": "off"
+    },
+    "globals": {
+        "jQuery": false,
+        "MultilingualPress": false,
+        "ajaxurl": false,
+        "adminpage": false
+    }
+}

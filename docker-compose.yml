@@ -1,0 +1,60 @@
+version: '3.1'
+services:
+  codecept:
+      image: vicheus/codeception
+      depends_on:
+        - chrome
+        - mysql
+        - cli
+      volumes:
+        - codeception:/project
+        - ./tests/codeception/codeception.yml:/project/codeception.yml
+        - ./tests/codeception/tests/:/project/tests/
+        - ./tests/codeception/_data/:/project/_data/
+        - ./tests/codeception/_output/:/project/_output/
+        - ./tests/codeception/_support/:/project/_support/
+  chrome:
+      image: 'selenium/standalone-chrome-debug'
+      ports:
+        - 5900:5900
+        - 4444:4444
+  wordpress:
+    image: wordpress:4.9.7
+    ports:
+      - 80:80
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      ABSPATH: /usr/src/wordpress/
+    volumes:
+      - wordpress:/var/www/html
+      - ./bin/multilingualpress:/var/www/html/wp-content/plugins/multilingualpress
+      - .:/var/www/html/wp-content/plugins/multilingualpress-yoast-seo-sync
+      - ./bin/.htaccess:/var/www/html/.htaccess
+  cli:
+    image: wordpress:cli-1
+    volumes:
+      - wordpress:/var/www/html
+      - ./bin/multilingualpress:/var/www/html/wp-content/plugins/multilingualpress
+      - .:/var/www/html/wp-content/plugins/multilingualpress-yoast-seo-sync
+      - codeception:/var/www/codeception
+      - ./bin/url-setter.php:/var/www/codeception/url-setter.php
+      - ./tests/codeception/tests/:/var/www/codeception/tests/
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+  phpmyadmin:
+    image: nazarpc/phpmyadmin
+    links:
+      - mysql:mysql
+    ports:
+      - 1234:80
+volumes:
+  wordpress:
+  codeception:

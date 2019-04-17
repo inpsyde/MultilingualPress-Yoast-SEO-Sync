@@ -1,0 +1,11 @@
+actor: Tester
+paths:
+    tests: tests
+    log: _output
+    data: _data
+    helpers: _support
+settings:
+    suite_class: \PHPUnit_Framework_TestSuite
+    memory_limit: 1024M
+    log: true
+    colors: true

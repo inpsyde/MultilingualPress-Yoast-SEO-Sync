@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ruleset name="MultilingualPress Coding Standard">
+
+    <file>./src</file>
+    <file>./multilingualpress-yoast-seo-sync.php</file>
+
+    <arg value="sp"/>
+
+    <config name="text_domain" value="multilingualpress-yoast-seo-sync"/>
+
+    <rule ref="Inpsyde"/>
+    <rule ref="Inpsyde.CodeQuality.Psr4">
+        <properties>
+            <property
+                    name="psr4"
+                    type="array"
+                    value="Inpsyde\MultilingualPress\YoastSeoSync=>src,Inpsyde\MultilingualPress\YoastSeoSync\Tests\Unit=>tests/php/unit"/>
+        </properties>
+    </rule>
+
+</ruleset>

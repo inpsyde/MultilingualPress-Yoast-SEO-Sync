@@ -1,0 +1,39 @@
+{
+  "name": "multilingualpress",
+  "version": "3.0.0-dev",
+  "description": "The multisite-based plugin for your multilingual WordPress websites.",
+  "keywords": [
+    "bilingual",
+    "i18n",
+    "international",
+    "internationalization",
+    "l10n",
+    "lang",
+    "language",
+    "localization",
+    "multi",
+    "multilanguage",
+    "multilingual",
+    "multisite",
+    "network",
+    "translation"
+  ],
+  "license": "GPL-2.0-or-later",
+  "author": {
+    "name": "Inpsyde GmbH",
+    "email": "hello@inpsyde.com",
+    "url": "https://inpsyde.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/inpsyde/multilingualpresspro"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-inpsyde": "^2.2.0",
+    "gulp": "^4.0.0",
+    "gulp-cli": "^2.1.0",
+    "gulp-eslint": "^4.0.0",
+    "gulp-newer": "^1.3.0"
+  }
+}

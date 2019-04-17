@@ -1,0 +1,24 @@
+# Codeception Test Suite Configuration
+
+class_name: MultilingualPressTester
+modules:
+    enabled:
+        - WebDriver
+        - Asserts
+        - Db
+    config:
+        WebDriver:
+            host: chrome
+            url: http://0.0.0.0
+            browser: chrome
+            port: 4444
+            window_size: 1024x768
+            restart: true
+        Db:
+            dsn: 'mysql:host=mysql:3306;dbname=wordpress'
+            user: 'wordpress'
+            password: 'wordpress'
+            dump: '_data/dump.sql'
+            populate: true
+            cleanup: true
+            reconnect: true
