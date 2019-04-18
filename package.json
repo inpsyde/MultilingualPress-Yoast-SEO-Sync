@@ -1,7 +1,7 @@
 {
   "name": "multilingualpress-yoast-seo-sync",
   "version": "2.0.0",
-  "description": "The multisite-based plugin for your multilingual WordPress websites.",
+  "description": "Translate Yoast SEO post metadata between translated posts.",
   "keywords": [
     "bilingual",
     "i18n",
