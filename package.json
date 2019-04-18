@@ -1,6 +1,6 @@
 {
-  "name": "multilingualpress",
-  "version": "3.0.0-dev",
+  "name": "multilingualpress-yoast-seo-sync",
+  "version": "2.0.0",
   "description": "The multisite-based plugin for your multilingual WordPress websites.",
   "keywords": [
     "bilingual",

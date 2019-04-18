@@ -1,11 +1,11 @@
 <?php // phpcs:disable
 /*
- * Plugin Name: MultilingualPress Yoast SEO Sync
+ * Plugin Name: MultilingualPress 3 Yoast SEO Sync
  * Plugin URI:
  * Description: Translate Yoast SEO post metadata between translated posts.
  * Author: Inpsyde GmbH
  * Author URI: https://inpsyde.com
- * Version: 1.0.0
+ * Version: 2.0.0
  * Text Domain: multilingualpress-yoast-seo-sync
  * Domain Path: /languages/
  * License: GPLv2+
