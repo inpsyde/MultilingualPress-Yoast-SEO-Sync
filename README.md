@@ -1,6 +1,10 @@
 # MultilingualPress 3 Yoast SEO Sync
 Synchronize the post metadata of the Yoast SEO plugin between translated posts.
 
+### Documentation
+[MultilingualPress-Yoast-Seo-Sync Documentation](https://multilingualpress.org/docs/multilingualpress-yoast-seo-sync/)
+
+### MultilingualPress 2
 This branch (`master` branch) contains the code for MultilingualPress 3, for MultilingualPress 2 there is [version-1-mlp2](https://github.com/inpsyde/MultilingualPress-Yoast-SEO-Sync/tree/version-1-mlp2) branch, also here is the [.zip for MultilingualPress 2](https://github.com/inpsyde/MultilingualPress-Yoast-SEO-Sync/releases/tag/v1.0.1).
 
 ### Development
