@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Post;
 
 use Inpsyde\MultilingualPress\Core\Entity\ActivePostTypes;
-use Inpsyde\MultilingualPress\Framework\Admin\AdminNotice;
 use Inpsyde\MultilingualPress\Framework\Admin\Metabox\Action;
 use Inpsyde\MultilingualPress\Framework\Admin\PersistentAdminNotices;
 use Inpsyde\MultilingualPress\Framework\Http\Request;

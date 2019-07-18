@@ -63,10 +63,17 @@ class Title
      */
     private function value(RelationshipContext $relationshipContext): string
     {
-        return (string)get_post_meta(
-            $relationshipContext->remoteTermId(),
-            '_yoast_wpseo_title',
-            true
-        );
+        $option = get_blog_option($relationshipContext->remoteSiteId(), 'wpseo_taxonomy_meta');
+        if(!$option) {
+            return '';
+        }
+
+        $term = get_term($relationshipContext->remoteTermId());
+        if($term instanceof \WP_Error) {
+            return '';
+        }
+        $taxonomy = $term->taxonomy;
+
+        return $option[$taxonomy][$relationshipContext->remoteTermId()]['wpseo_title'] ?? '';
     }
 }

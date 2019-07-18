@@ -31,4 +31,21 @@ class TermMetaboxTabCest
 
         $i->seeElement('#tab-anchor-multilingualpress-site-2-tab-yoast');
     }
+
+    public function copyYoastSeoValuesToRemoteSite(CodeCeptionTester $i)
+    {
+        $i->amOnPage('/wp-admin/term.php?taxonomy=category&tag_ID=1&post_type=post');
+        $i->checkOption('#multilingualpress-site-2-relationship-new');
+        $i->click('Update');
+
+        $i->click('#tab-anchor-multilingualpress-site-2-tab-yoast');
+        $i->fillField('#multilingualpress-site-2-yoast_wpseo_title', 'Some title here');
+
+        $i->click('Update');
+        $i->click('#tab-anchor-multilingualpress-site-2-tab-yoast');
+
+        $i->seeInField('#multilingualpress-site-2-yoast_wpseo_title', 'Some title here');
+
+        // TODO go to remote site and check value
+    }
 }

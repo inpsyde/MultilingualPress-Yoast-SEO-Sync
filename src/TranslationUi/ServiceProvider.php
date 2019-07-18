@@ -20,9 +20,12 @@ use Inpsyde\MultilingualPress\Framework\Service\Container;
 use Inpsyde\MultilingualPress\TranslationUi\MetaboxFieldsHelper;
 use Inpsyde\MultilingualPress\TranslationUi\Post;
 use Inpsyde\MultilingualPress\TranslationUi\Post\Metabox as PostBox;
+use Inpsyde\MultilingualPress\TranslationUi\Term\RelationshipContext;
 use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Post\MetaboxAction as PostMetaboxAction;
-use Inpsyde\MultilingualPress\TranslationUi\Term\Metabox as TermBox;
 use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Post\MetaboxFields as PostMetaboxFields;
+use Inpsyde\MultilingualPress\TranslationUi\Term;
+use Inpsyde\MultilingualPress\TranslationUi\Term\Metabox as TermBox;
+use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\MetaboxAction as TermMetaboxAction;
 use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\MetaboxFields as TermMetaboxFields;
 
 /**
@@ -95,6 +98,27 @@ final class ServiceProvider implements BootstrappableServiceProvider
             function (array $tabs) use ($termMetaboxFields) {
                 return array_merge($tabs, $termMetaboxFields->allFieldsTabs());
             }
+        );
+
+        add_action(
+            Term\MetaboxAction::ACTION_METABOX_AFTER_RELATE_TERMS,
+            function (
+                Term\RelationshipContext $context,
+                Request $request,
+                PersistentAdminNotices $notice
+            ) use (
+                $termMetaboxFields,
+                $container
+            ) {
+                $metaboxAction = new TermMetaboxAction(
+                    $termMetaboxFields,
+                    new MetaboxFieldsHelper($context->remoteSiteId()),
+                    $context
+                );
+                $metaboxAction->save($request, $notice);
+            },
+            10,
+            3
         );
     }
 }
