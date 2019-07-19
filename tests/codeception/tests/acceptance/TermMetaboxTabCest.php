@@ -42,6 +42,7 @@ class TermMetaboxTabCest
         $i->fillField('#multilingualpress-site-2-yoast_wpseo_focuskw', 'Some focus keyphrase here');
         $i->fillField('#multilingualpress-site-2-yoast_wpseo_title', 'Some title here');
         $i->fillField('#multilingualpress-site-2-yoast_wpseo_metadesc', 'Some description here');
+        $i->fillField('#multilingualpress-site-2-yoast_wpseo_canonical', 'http://canonic.al');
 
         $i->click('Update');
         $i->click('#tab-anchor-multilingualpress-site-2-tab-yoast');
@@ -49,5 +50,6 @@ class TermMetaboxTabCest
         $i->seeInField('#multilingualpress-site-2-yoast_wpseo_focuskw', 'Some focus keyphrase here');
         $i->seeInField('#multilingualpress-site-2-yoast_wpseo_title', 'Some title here');
         $i->seeInField('#multilingualpress-site-2-yoast_wpseo_metadesc', 'Some description here');
+        $i->seeInField('#multilingualpress-site-2-yoast_wpseo_canonical', 'http://canonic.al');
     }
 }

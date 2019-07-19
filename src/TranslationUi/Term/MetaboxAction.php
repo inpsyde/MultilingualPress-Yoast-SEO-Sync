@@ -49,6 +49,7 @@ final class MetaboxAction implements Action
         $focuskw = $values["site-{$this->relationshipContext->remoteSiteId()}"]["yoast_wpseo_focuskw"];
         $title = $values["site-{$this->relationshipContext->remoteSiteId()}"]["yoast_wpseo_title"];
         $metadesc = $values["site-{$this->relationshipContext->remoteSiteId()}"]["yoast_wpseo_metadesc"];
+        $canonical = $values["site-{$this->relationshipContext->remoteSiteId()}"]["yoast_wpseo_canonical"];
 
         $option = get_blog_option($this->relationshipContext->remoteSiteId(), 'wpseo_taxonomy_meta');
         $term = get_term($this->relationshipContext->remoteTermId());
@@ -57,6 +58,7 @@ final class MetaboxAction implements Action
         $option[$taxonomy][$this->relationshipContext->remoteTermId()]['wpseo_focuskw'] = $focuskw;
         $option[$taxonomy][$this->relationshipContext->remoteTermId()]['wpseo_title'] = $title;
         $option[$taxonomy][$this->relationshipContext->remoteTermId()]['wpseo_desc'] = $metadesc;
+        $option[$taxonomy][$this->relationshipContext->remoteTermId()]['wpseo_canonical'] = $canonical;
 
         return update_blog_option($this->relationshipContext->remoteSiteId(), 'wpseo_taxonomy_meta', $option);
     }
