@@ -46,11 +46,13 @@ final class MetaboxAction implements Action
             FILTER_FORCE_ARRAY
         );
         $title = $values["site-{$this->relationshipContext->remoteSiteId()}"]["yoast_wpseo_title"];
+        $metadesc = $values["site-{$this->relationshipContext->remoteSiteId()}"]["yoast_wpseo_metadesc"];
 
         $option = get_blog_option($this->relationshipContext->remoteSiteId(), 'wpseo_taxonomy_meta');
         $term = get_term($this->relationshipContext->remoteTermId());
         $taxonomy = $term->taxonomy;
         $option[$taxonomy][$this->relationshipContext->remoteTermId()]['wpseo_title'] = $title;
+        $option[$taxonomy][$this->relationshipContext->remoteTermId()]['wpseo_desc'] = $metadesc;
 
         return update_blog_option($this->relationshipContext->remoteSiteId(), 'wpseo_taxonomy_meta', $option);
     }

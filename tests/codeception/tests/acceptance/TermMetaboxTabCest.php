@@ -45,7 +45,5 @@ class TermMetaboxTabCest
         $i->click('#tab-anchor-multilingualpress-site-2-tab-yoast');
 
         $i->seeInField('#multilingualpress-site-2-yoast_wpseo_title', 'Some title here');
-
-        // TODO go to remote site and check value
     }
 }

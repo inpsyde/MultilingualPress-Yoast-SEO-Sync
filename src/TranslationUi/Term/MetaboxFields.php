@@ -14,12 +14,14 @@ namespace Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term;
 
 use Inpsyde\MultilingualPress\TranslationUi\Term\MetaboxField;
 use Inpsyde\MultilingualPress\TranslationUi\Term\MetaboxTab;
+use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\Field\MetaDescription;
 use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\Field\Title;
 
 class MetaboxFields
 {
     const TAB = 'tab-yoast';
     const FIELD_TITLE = 'yoast_wpseo_title';
+    const FIELD_META_DESCRIPTION = 'yoast_wpseo_metadesc';
 
     /**
      * Creates fields for Yoast tab.
@@ -39,6 +41,11 @@ class MetaboxFields
                     self::FIELD_TITLE,
                     new Title(),
                     [Title::class, 'sanitize']
+                ),
+                new MetaboxField(
+                    self::FIELD_META_DESCRIPTION,
+                    new MetaDescription(),
+                    [MetaDescription::class, 'sanitize']
                 )
             )
         ];
