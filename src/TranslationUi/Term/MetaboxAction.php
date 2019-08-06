@@ -46,20 +46,23 @@ final class MetaboxAction implements Action
             FILTER_FORCE_ARRAY
         );
 
-        $focuskw = $values["site-{$this->relationshipContext->remoteSiteId()}"]["yoast_wpseo_focuskw"];
-        $title = $values["site-{$this->relationshipContext->remoteSiteId()}"]["yoast_wpseo_title"];
-        $metadesc = $values["site-{$this->relationshipContext->remoteSiteId()}"]["yoast_wpseo_metadesc"];
-        $canonical = $values["site-{$this->relationshipContext->remoteSiteId()}"]["yoast_wpseo_canonical"];
+        $remoteSiteId = $this->relationshipContext->remoteSiteId();
+        $remoteTermId = $this->relationshipContext->remoteTermId();
 
-        $option = get_blog_option($this->relationshipContext->remoteSiteId(), 'wpseo_taxonomy_meta');
-        $term = get_term($this->relationshipContext->remoteTermId());
+        $focuskw = $values["site-{$remoteSiteId}"][MetaboxFields::FIELD_FOCUS_KEYPHRASE];
+        $title = $values["site-{$remoteSiteId}"][Metaboxfields::FIELD_TITLE];
+        $metadesc = $values["site-{$remoteSiteId}"][Metaboxfields::FIELD_META_DESCRIPTION];
+        $canonical = $values["site-{$remoteSiteId}"][MetaboxFields::FIELD_CANONICAL];
+
+        $option = get_blog_option($remoteSiteId, 'wpseo_taxonomy_meta');
+        $term = get_term($remoteTermId);
         $taxonomy = $term->taxonomy;
 
-        $option[$taxonomy][$this->relationshipContext->remoteTermId()]['wpseo_focuskw'] = $focuskw;
-        $option[$taxonomy][$this->relationshipContext->remoteTermId()]['wpseo_title'] = $title;
-        $option[$taxonomy][$this->relationshipContext->remoteTermId()]['wpseo_desc'] = $metadesc;
-        $option[$taxonomy][$this->relationshipContext->remoteTermId()]['wpseo_canonical'] = $canonical;
+        $option[$taxonomy][$remoteTermId][MetaboxFields::FIELD_FOCUS_KEYPHRASE] = $focuskw;
+        $option[$taxonomy][$remoteTermId][Metaboxfields::FIELD_TITLE] = $title;
+        $option[$taxonomy][$remoteTermId][Metaboxfields::FIELD_META_DESCRIPTION] = $metadesc;
+        $option[$taxonomy][$remoteTermId][MetaboxFields::FIELD_CANONICAL] = $canonical;
 
-        return update_blog_option($this->relationshipContext->remoteSiteId(), 'wpseo_taxonomy_meta', $option);
+        return update_blog_option($remoteSiteId, 'wpseo_taxonomy_meta', $option);
     }
 }

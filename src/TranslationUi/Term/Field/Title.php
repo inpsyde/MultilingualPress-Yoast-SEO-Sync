@@ -1,6 +1,6 @@
 <?php # -*- coding: utf-8 -*-
 /*
- * This file is part of the MultilingualPress Extensions Boilerplate package.
+ * This file is part of the MultilingualPress Yoast Seo Sync package.
  *
  * (c) Inpsyde GmbH
  *
@@ -40,7 +40,7 @@ class Title
                        class="large-text"
                        name="<?= esc_attr($name) ?>"
                        id="<?= esc_attr($id) ?>"
-                       value="<?= esc_attr($value) ?>"/>
+                       value="<?= esc_html($value) ?>"/>
             </td>
         </tr>
         <?php

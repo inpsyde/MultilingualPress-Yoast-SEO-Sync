@@ -1,6 +1,6 @@
 <?php # -*- coding: utf-8 -*-
 /*
- * This file is part of the MultilingualPress Extensions Boilerplate package.
+ * This file is part of the MultilingualPress Yoast Seo Sync package.
  *
  * (c) Inpsyde GmbH
  *
