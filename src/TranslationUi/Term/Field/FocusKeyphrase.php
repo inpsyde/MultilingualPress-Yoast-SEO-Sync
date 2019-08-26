@@ -73,6 +73,6 @@ class FocusKeyphrase
         }
         $taxonomy = $term->taxonomy;
 
-        return $option[$taxonomy][$relationshipContext->remoteTermId()]['wpseo_focuskw'] ?? '';
+        return $option[$taxonomy][$relationshipContext->remoteTermId()][MetaboxFields::FIELD_FOCUS_KEYPHRASE] ?? '';
     }
 }

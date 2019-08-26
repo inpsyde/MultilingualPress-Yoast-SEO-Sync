@@ -74,6 +74,6 @@ class CanonicalUrl
         }
         $taxonomy = $term->taxonomy;
 
-        return $option[$taxonomy][$relationshipContext->remoteTermId()]['wpseo_canonical'] ?? '';
+        return $option[$taxonomy][$relationshipContext->remoteTermId()][MetaboxFields::FIELD_CANONICAL] ?? '';
     }
 }

@@ -74,6 +74,6 @@ class Title
         }
         $taxonomy = $term->taxonomy;
 
-        return $option[$taxonomy][$relationshipContext->remoteTermId()]['wpseo_title'] ?? '';
+        return $option[$taxonomy][$relationshipContext->remoteTermId()][MetaboxFields::FIELD_TITLE] ?? '';
     }
 }

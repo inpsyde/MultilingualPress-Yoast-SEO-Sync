@@ -73,6 +73,6 @@ class MetaDescription
         }
         $taxonomy = $term->taxonomy;
 
-        return $option[$taxonomy][$relationshipContext->remoteTermId()]['wpseo_desc'] ?? '';
+        return $option[$taxonomy][$relationshipContext->remoteTermId()][MetaboxFields::FIELD_META_DESCRIPTION] ?? '';
     }
 }
