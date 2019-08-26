@@ -43,22 +43,22 @@ class MetaboxFields
                 ),
                 new MetaboxField(
                     self::FIELD_FOCUS_KEYPHRASE,
-                    new FocusKeyphrase(),
+                    new FocusKeyphrase(new Repository()),
                     [FocusKeyphrase::class, 'sanitize']
                 ),
                 new MetaboxField(
                     self::FIELD_TITLE,
-                    new Title(),
+                    new Title(new Repository()),
                     [Title::class, 'sanitize']
                 ),
                 new MetaboxField(
                     self::FIELD_META_DESCRIPTION,
-                    new MetaDescription(),
+                    new MetaDescription(new Repository()),
                     [MetaDescription::class, 'sanitize']
                 ),
                 new MetaboxField(
                     self::FIELD_CANONICAL,
-                    new CanonicalUrl(),
+                    new CanonicalUrl(new Repository()),
                     [CanonicalUrl::class, 'sanitize']
                 )
             ),

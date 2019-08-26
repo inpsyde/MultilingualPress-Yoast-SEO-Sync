@@ -15,9 +15,23 @@ namespace Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\Field;
 use Inpsyde\MultilingualPress\TranslationUi\MetaboxFieldsHelper;
 use Inpsyde\MultilingualPress\TranslationUi\Term\RelationshipContext;
 use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\MetaboxFields;
+use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\Repository;
 
 class FocusKeyphrase
 {
+    /**
+     * @var Repository
+     */
+    private $repository;
+
+    /**
+     * @param Repository $repository
+     */
+    public function __construct(Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * @param MetaboxFieldsHelper $helper
      * @param RelationshipContext $context
@@ -62,17 +76,6 @@ class FocusKeyphrase
      */
     private function value(RelationshipContext $relationshipContext): string
     {
-        $option = get_blog_option($relationshipContext->remoteSiteId(), 'wpseo_taxonomy_meta');
-        if(!$option) {
-            return '';
-        }
-
-        $term = get_term($relationshipContext->remoteTermId());
-        if($term instanceof \WP_Error) {
-            return '';
-        }
-        $taxonomy = $term->taxonomy;
-
-        return $option[$taxonomy][$relationshipContext->remoteTermId()][MetaboxFields::FIELD_FOCUS_KEYPHRASE] ?? '';
+        return $this->repository->optionByContext($relationshipContext, MetaboxFields::FIELD_FOCUS_KEYPHRASE);
     }
 }
