@@ -26,6 +26,11 @@ final class MetaboxAction implements Action
      */
     private $relationshipContext;
 
+    /**
+     * @param MetaboxFields $metaboxFields
+     * @param MetaboxFieldsHelper $fieldsHelper
+     * @param Term\RelationshipContext $relationshipContext
+     */
     public function __construct(
         MetaboxFields $metaboxFields,
         MetaboxFieldsHelper $fieldsHelper,
@@ -37,6 +42,11 @@ final class MetaboxAction implements Action
         $this->relationshipContext = $relationshipContext;
     }
 
+    /**
+     * @param Request $request
+     * @param PersistentAdminNotices $notices
+     * @return bool
+     */
     public function save(Request $request, PersistentAdminNotices $notices): bool
     {
         $values = $request->bodyValue(
@@ -49,13 +59,17 @@ final class MetaboxAction implements Action
         $remoteSiteId = $this->relationshipContext->remoteSiteId();
         $remoteTermId = $this->relationshipContext->remoteTermId();
 
-        $focuskw = $values["site-{$remoteSiteId}"][MetaboxFields::FIELD_FOCUS_KEYPHRASE];
-        $title = $values["site-{$remoteSiteId}"][Metaboxfields::FIELD_TITLE];
-        $metadesc = $values["site-{$remoteSiteId}"][Metaboxfields::FIELD_META_DESCRIPTION];
-        $canonical = $values["site-{$remoteSiteId}"][MetaboxFields::FIELD_CANONICAL];
+        $focuskw = $values["site-{$remoteSiteId}"][MetaboxFields::FIELD_FOCUS_KEYPHRASE] ?? '';
+        $title = $values["site-{$remoteSiteId}"][Metaboxfields::FIELD_TITLE] ?? '';
+        $metadesc = $values["site-{$remoteSiteId}"][Metaboxfields::FIELD_META_DESCRIPTION] ?? '';
+        $canonical = $values["site-{$remoteSiteId}"][MetaboxFields::FIELD_CANONICAL] ?? '';
 
-        $option = get_blog_option($remoteSiteId, 'wpseo_taxonomy_meta');
+        $option = (array)(get_blog_option($remoteSiteId, 'wpseo_taxonomy_meta', []) ?: []);
+
         $term = get_term($remoteTermId);
+        if ($term instanceof \WP_Error) {
+            return false;
+        }
         $taxonomy = $term->taxonomy;
 
         $option[$taxonomy][$remoteTermId][MetaboxFields::FIELD_FOCUS_KEYPHRASE] = $focuskw;

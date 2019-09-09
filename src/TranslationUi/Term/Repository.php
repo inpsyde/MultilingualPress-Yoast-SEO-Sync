@@ -22,6 +22,7 @@ class Repository
      * @param RelationshipContext $relationshipContext
      * @param string $optionKey
      * @return string
+     * @throws \DomainException
      */
     public function optionByContext(RelationshipContext $relationshipContext, string $optionKey): string
     {
@@ -29,8 +30,8 @@ class Repository
             throw new \InvalidArgumentException('Option key cannot be empty.');
         }
 
-        $option = get_blog_option($relationshipContext->remoteSiteId(), self::OPTION_KEY);
-        if(!$option) {
+        $option = (array)(get_blog_option($relationshipContext->remoteSiteId(), self::OPTION_KEY, []) ?: []);
+        if (!$option) {
             return '';
         }
 
