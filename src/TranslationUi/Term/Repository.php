@@ -30,7 +30,7 @@ class Repository
             throw new \InvalidArgumentException('Option key cannot be empty.');
         }
 
-        $option = (array)(get_blog_option($relationshipContext->remoteSiteId(), self::OPTION_KEY, []) ?: []);
+        $option = get_blog_option($relationshipContext->remoteSiteId(), self::OPTION_KEY, []) ?: [];
         if (!$option) {
             return '';
         }

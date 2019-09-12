@@ -64,7 +64,7 @@ final class MetaboxAction implements Action
         $metadesc = $values["site-{$remoteSiteId}"][Metaboxfields::FIELD_META_DESCRIPTION] ?? '';
         $canonical = $values["site-{$remoteSiteId}"][MetaboxFields::FIELD_CANONICAL] ?? '';
 
-        $option = (array)(get_blog_option($remoteSiteId, 'wpseo_taxonomy_meta', []) ?: []);
+        $option = get_blog_option($remoteSiteId, 'wpseo_taxonomy_meta', []) ?: [];
 
         $term = get_term($remoteTermId);
         if ($term instanceof \WP_Error) {
