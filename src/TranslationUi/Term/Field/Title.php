@@ -77,6 +77,6 @@ class Title
      */
     private function value(RelationshipContext $relationshipContext): string
     {
-        return $this->repository->optionByContext($relationshipContext, MetaboxFields::FIELD_TITLE);
+        return $this->repository->optionByContext($relationshipContext, 'wpseo_title');
     }
 }

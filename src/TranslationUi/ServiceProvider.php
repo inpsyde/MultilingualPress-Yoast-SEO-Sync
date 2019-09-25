@@ -91,34 +91,36 @@ final class ServiceProvider implements BootstrappableServiceProvider
             3
         );
 
-        $termMetaboxFields = $container[TermMetaboxFields::class];
+        if (Term\MetaboxAction::ACTION_METABOX_AFTER_RELATE_TERMS ?? false) {
+            $termMetaboxFields = $container[TermMetaboxFields::class];
 
-        add_filter(
-            TermBox::HOOK_PREFIX . 'tabs',
-            function (array $tabs) use ($termMetaboxFields) {
-                return array_merge($tabs, $termMetaboxFields->allFieldsTabs());
-            }
-        );
+            add_filter(
+                TermBox::HOOK_PREFIX . 'tabs',
+                function (array $tabs) use ($termMetaboxFields) {
+                    return array_merge($tabs, $termMetaboxFields->allFieldsTabs());
+                }
+            );
 
-        add_action(
-            Term\MetaboxAction::ACTION_METABOX_AFTER_RELATE_TERMS,
-            function (
-                Term\RelationshipContext $context,
-                Request $request,
-                PersistentAdminNotices $notice
-            ) use (
-                $termMetaboxFields,
-                $container
-            ) {
-                $metaboxAction = new TermMetaboxAction(
+            add_action(
+                Term\MetaboxAction::ACTION_METABOX_AFTER_RELATE_TERMS,
+                function (
+                    Term\RelationshipContext $context,
+                    Request $request,
+                    PersistentAdminNotices $notice
+                ) use (
                     $termMetaboxFields,
-                    new MetaboxFieldsHelper($context->remoteSiteId()),
-                    $context
-                );
-                $metaboxAction->save($request, $notice);
-            },
-            10,
-            3
-        );
+                    $container
+                ) {
+                    $metaboxAction = new TermMetaboxAction(
+                        $termMetaboxFields,
+                        new MetaboxFieldsHelper($context->remoteSiteId()),
+                        $context
+                    );
+                    $metaboxAction->save($request, $notice);
+                },
+                10,
+                3
+            );
+        }
     }
 }

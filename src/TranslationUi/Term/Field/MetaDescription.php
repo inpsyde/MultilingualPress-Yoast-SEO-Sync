@@ -76,6 +76,6 @@ class MetaDescription
      */
     private function value(RelationshipContext $relationshipContext): string
     {
-        return $this->repository->optionByContext($relationshipContext, MetaboxFields::FIELD_META_DESCRIPTION);
+        return $this->repository->optionByContext($relationshipContext, 'wpseo_desc');
     }
 }

@@ -72,10 +72,10 @@ final class MetaboxAction implements Action
         }
         $taxonomy = $term->taxonomy;
 
-        $option[$taxonomy][$remoteTermId][MetaboxFields::FIELD_FOCUS_KEYPHRASE] = $focuskw;
-        $option[$taxonomy][$remoteTermId][Metaboxfields::FIELD_TITLE] = $title;
-        $option[$taxonomy][$remoteTermId][Metaboxfields::FIELD_META_DESCRIPTION] = $metadesc;
-        $option[$taxonomy][$remoteTermId][MetaboxFields::FIELD_CANONICAL] = $canonical;
+        $option[$taxonomy][$remoteTermId]['wpseo_focuskw'] = $focuskw;
+        $option[$taxonomy][$remoteTermId]['wpseo_title'] = $title;
+        $option[$taxonomy][$remoteTermId]['wpseo_desc'] = $metadesc;
+        $option[$taxonomy][$remoteTermId]['wpseo_canonical'] = $canonical;
 
         return update_blog_option($remoteSiteId, 'wpseo_taxonomy_meta', $option);
     }

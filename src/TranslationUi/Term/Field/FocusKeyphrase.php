@@ -76,6 +76,6 @@ class FocusKeyphrase
      */
     private function value(RelationshipContext $relationshipContext): string
     {
-        return $this->repository->optionByContext($relationshipContext, MetaboxFields::FIELD_FOCUS_KEYPHRASE);
+        return $this->repository->optionByContext($relationshipContext, 'wpseo_focuskw');
     }
 }
