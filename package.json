@@ -1,6 +1,6 @@
 {
   "name": "multilingualpress-yoast-seo-sync",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Translate Yoast SEO post metadata between translated posts.",
   "keywords": [
     "bilingual",
