@@ -91,7 +91,7 @@ final class ServiceProvider implements BootstrappableServiceProvider
             3
         );
 
-        if (Term\MetaboxAction::ACTION_METABOX_AFTER_RELATE_TERMS ?? false) {
+        if (defined('\\Inpsyde\\MultilingualPress\\TranslationUi\\Term\\MetaboxAction::ACTION_METABOX_AFTER_RELATE_TERMS')) {
             $termMetaboxFields = $container[TermMetaboxFields::class];
 
             add_filter(
