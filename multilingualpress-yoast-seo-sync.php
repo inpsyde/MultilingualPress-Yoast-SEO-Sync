@@ -5,7 +5,7 @@
  * Description: Translate Yoast SEO post metadata between translated posts.
  * Author: Inpsyde GmbH
  * Author URI: https://inpsyde.com
- * Version: 2.1.0
+ * Version: 2.1.1
  * Text Domain: multilingualpress-yoast-seo-sync
  * Domain Path: /languages/
  * License: GPLv2+

@@ -1,3 +1,6 @@
+2019-09-26 - version 2.1.1
+* Add: Check for class existence in autoload, it makes possible being required from composer.
+
 2019-09-25 - version 2.1.0
 * Add: New Yoast SEO Tab for taxonomy terms.
 * Fixed: Yoast term meta data synchronization across connected sites.
