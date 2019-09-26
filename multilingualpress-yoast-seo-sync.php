@@ -51,6 +51,10 @@ function autoload()
     if (is_bool($done)) {
         return $done;
     }
+    if (class_exists(PluginProperties::class)) {
+        $done = true;
+        return true;
+    }
     if (is_readable(__DIR__ . '/autoload.php')) {
         require_once __DIR__ . '/autoload.php';
         $done = true;
