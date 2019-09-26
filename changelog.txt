@@ -1,0 +1,6 @@
+2019-09-25 - version 2.1.0
+* Add: New Yoast SEO Tab for taxonomy terms.
+* Fixed: Yoast term meta data synchronization across connected sites.
+
+2019-04-19 - version 2.0.0
+* Initial Release

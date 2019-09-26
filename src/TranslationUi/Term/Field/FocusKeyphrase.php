@@ -10,29 +10,42 @@
 
 declare(strict_types=1);
 
-namespace Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Post\Field;
+namespace Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\Field;
 
 use Inpsyde\MultilingualPress\TranslationUi\MetaboxFieldsHelper;
-use Inpsyde\MultilingualPress\TranslationUi\Post\RelationshipContext;
-use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Post\MetaboxFields;
+use Inpsyde\MultilingualPress\TranslationUi\Term\RelationshipContext;
+use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\MetaboxFields;
+use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\Repository;
 
-class Title
+class FocusKeyphrase
 {
+    /**
+     * @var Repository
+     */
+    private $repository;
+
+    /**
+     * @param Repository $repository
+     */
+    public function __construct(Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * @param MetaboxFieldsHelper $helper
      * @param RelationshipContext $context
      */
     public function __invoke(MetaboxFieldsHelper $helper, RelationshipContext $context)
     {
-        $id = $helper->fieldId(MetaboxFields::FIELD_TITLE);
-        $name = $helper->fieldName(MetaboxFields::FIELD_TITLE);
+        $id = $helper->fieldId(MetaboxFields::FIELD_FOCUS_KEYPHRASE);
+        $name = $helper->fieldName(MetaboxFields::FIELD_FOCUS_KEYPHRASE);
         $value = $this->value($context);
-
         ?>
         <tr>
             <th scope="row">
                 <label>
-                    <?php esc_html_e('SEO title', 'multilingualpress-yoast-seo-sync') ?>
+                    <?php esc_html_e('Focus keyphrase', 'multilingualpress-yoast-seo-sync') ?>
                 </label>
             </th>
             <td>
@@ -63,10 +76,6 @@ class Title
      */
     private function value(RelationshipContext $relationshipContext): string
     {
-        return (string)get_post_meta(
-            $relationshipContext->remotePostId(),
-            '_yoast_wpseo_title',
-            true
-        );
+        return $this->repository->optionByContext($relationshipContext, 'wpseo_focuskw');
     }
 }

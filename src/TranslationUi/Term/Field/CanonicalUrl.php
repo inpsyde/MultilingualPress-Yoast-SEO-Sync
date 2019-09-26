@@ -10,37 +10,51 @@
 
 declare(strict_types=1);
 
-namespace Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Post\Field;
+namespace Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\Field;
 
 use Inpsyde\MultilingualPress\TranslationUi\MetaboxFieldsHelper;
-use Inpsyde\MultilingualPress\TranslationUi\Post\RelationshipContext;
-use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Post\MetaboxFields;
+use Inpsyde\MultilingualPress\TranslationUi\Term\RelationshipContext;
+use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\MetaboxFields;
+use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\Repository;
 
-class Title
+class CanonicalUrl
 {
+    /**
+     * @var Repository
+     */
+    private $repository;
+
+    /**
+     * @param Repository $repository
+     */
+    public function __construct(Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * @param MetaboxFieldsHelper $helper
      * @param RelationshipContext $context
      */
     public function __invoke(MetaboxFieldsHelper $helper, RelationshipContext $context)
     {
-        $id = $helper->fieldId(MetaboxFields::FIELD_TITLE);
-        $name = $helper->fieldName(MetaboxFields::FIELD_TITLE);
+        $id = $helper->fieldId(MetaboxFields::FIELD_CANONICAL);
+        $name = $helper->fieldName(MetaboxFields::FIELD_CANONICAL);
         $value = $this->value($context);
 
         ?>
         <tr>
             <th scope="row">
                 <label>
-                    <?php esc_html_e('SEO title', 'multilingualpress-yoast-seo-sync') ?>
+                    <?php esc_html_e('Canonical URL', 'multilingualpress-yoast-seo-sync') ?>
                 </label>
             </th>
             <td>
-                <input type="text"
+                <input type="url"
                        class="large-text"
                        name="<?= esc_attr($name) ?>"
                        id="<?= esc_attr($id) ?>"
-                       value="<?= esc_attr($value) ?>"/>
+                       value="<?= esc_url($value) ?>"/>
             </td>
         </tr>
         <?php
@@ -52,7 +66,7 @@ class Title
      */
     public static function sanitize(string $value): string
     {
-        return sanitize_text_field($value);
+        return esc_url_raw($value);
     }
 
     /**
@@ -63,10 +77,6 @@ class Title
      */
     private function value(RelationshipContext $relationshipContext): string
     {
-        return (string)get_post_meta(
-            $relationshipContext->remotePostId(),
-            '_yoast_wpseo_title',
-            true
-        );
+        return $this->repository->optionByContext($relationshipContext, 'wpseo_canonical');
     }
 }

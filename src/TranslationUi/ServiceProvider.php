@@ -1,6 +1,6 @@
 <?php # -*- coding: utf-8 -*-
 /*
- * This file is part of the MultilingualPress Extensions Boilerplate package.
+ * This file is part of the MultilingualPress Yoast Seo Sync package.
  *
  * (c) Inpsyde GmbH
  *
@@ -18,10 +18,15 @@ use Inpsyde\MultilingualPress\Framework\Http\Request;
 use Inpsyde\MultilingualPress\Framework\Service\BootstrappableServiceProvider;
 use Inpsyde\MultilingualPress\Framework\Service\Container;
 use Inpsyde\MultilingualPress\TranslationUi\MetaboxFieldsHelper;
-use Inpsyde\MultilingualPress\TranslationUi\Post\Metabox as Box;
-use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Post\MetaboxAction;
-use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Post\MetaboxFields;
 use Inpsyde\MultilingualPress\TranslationUi\Post;
+use Inpsyde\MultilingualPress\TranslationUi\Post\Metabox as PostBox;
+use Inpsyde\MultilingualPress\TranslationUi\Term\RelationshipContext;
+use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Post\MetaboxAction as PostMetaboxAction;
+use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Post\MetaboxFields as PostMetaboxFields;
+use Inpsyde\MultilingualPress\TranslationUi\Term;
+use Inpsyde\MultilingualPress\TranslationUi\Term\Metabox as TermBox;
+use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\MetaboxAction as TermMetaboxAction;
+use Inpsyde\MultilingualPress\YoastSeoSync\TranslationUi\Term\MetaboxFields as TermMetaboxFields;
 
 /**
  * Class ServiceProvider
@@ -36,9 +41,16 @@ final class ServiceProvider implements BootstrappableServiceProvider
     public function register(Container $container)
     {
         $container->addService(
-            MetaboxFields::class,
-            function (): MetaboxFields {
-                return new MetaboxFields();
+            PostMetaboxFields::class,
+            function (): PostMetaboxFields {
+                return new PostMetaboxFields();
+            }
+        );
+
+        $container->addService(
+            TermMetaboxFields::class,
+            function (): TermMetaboxFields {
+                return new TermMetaboxFields();
             }
         );
     }
@@ -48,11 +60,14 @@ final class ServiceProvider implements BootstrappableServiceProvider
      */
     public function bootstrap(Container $container)
     {
-        $metaboxFields = $container[MetaboxFields::class];
+        $postMetaboxFields = $container[PostMetaboxFields::class];
 
-        add_filter(Box::HOOK_PREFIX . 'tabs', function (array $tabs) use ($metaboxFields) {
-            return array_merge($tabs, $metaboxFields->allFieldsTabs());
-        });
+        add_filter(
+            PostBox::HOOK_PREFIX . 'tabs',
+            function (array $tabs) use ($postMetaboxFields) {
+                return array_merge($tabs, $postMetaboxFields->allFieldsTabs());
+            }
+        );
 
         add_action(
             Post\MetaboxAction::ACTION_METABOX_AFTER_RELATE_POSTS,
@@ -61,11 +76,11 @@ final class ServiceProvider implements BootstrappableServiceProvider
                 Request $request,
                 PersistentAdminNotices $notice
             ) use (
-                $metaboxFields,
+                $postMetaboxFields,
                 $container
             ) {
-                $metaboxAction = new MetaboxAction(
-                    $metaboxFields,
+                $metaboxAction = new PostMetaboxAction(
+                    $postMetaboxFields,
                     new MetaboxFieldsHelper($context->remoteSiteId()),
                     $context,
                     $container[ActivePostTypes::class]
@@ -75,5 +90,37 @@ final class ServiceProvider implements BootstrappableServiceProvider
             10,
             3
         );
+
+        if (defined('\\Inpsyde\\MultilingualPress\\TranslationUi\\Term\\MetaboxAction::ACTION_METABOX_AFTER_RELATE_TERMS')) {
+            $termMetaboxFields = $container[TermMetaboxFields::class];
+
+            add_filter(
+                TermBox::HOOK_PREFIX . 'tabs',
+                function (array $tabs) use ($termMetaboxFields) {
+                    return array_merge($tabs, $termMetaboxFields->allFieldsTabs());
+                }
+            );
+
+            add_action(
+                Term\MetaboxAction::ACTION_METABOX_AFTER_RELATE_TERMS,
+                function (
+                    Term\RelationshipContext $context,
+                    Request $request,
+                    PersistentAdminNotices $notice
+                ) use (
+                    $termMetaboxFields,
+                    $container
+                ) {
+                    $metaboxAction = new TermMetaboxAction(
+                        $termMetaboxFields,
+                        new MetaboxFieldsHelper($context->remoteSiteId()),
+                        $context
+                    );
+                    $metaboxAction->save($request, $notice);
+                },
+                10,
+                3
+            );
+        }
     }
 }
