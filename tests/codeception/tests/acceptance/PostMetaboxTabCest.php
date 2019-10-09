@@ -73,9 +73,7 @@ class PostMetaboxTabCest
         $i->click('.nux-dot-tip__disable');
 
         // set focus keyphase value
-        $i->click('#yoast-seo-analysis-collapsible-metabox');
-        $i->wait(2);
-        $i->fillField('#focus-keyword-input', 'Focus Keyphase value');
+        $i->fillField('#focus-keyword-input-metabox', 'Focus Keyphase value');
 
         // fill focus keyphase field in yoast tab
         $i->wait(2);
@@ -88,9 +86,7 @@ class PostMetaboxTabCest
 
         // go to site 2 and check focus keyphase
         $i->amOnPage('/site2/wp-admin/post.php?post=1&action=edit');
-        $i->click('#yoast-seo-analysis-collapsible-metabox');
-        $i->wait(2);
-        $i->assertEquals('Remote Focus Keyphase value', $i->grabValueFrom('#focus-keyword-input'));
+        $i->assertEquals('Remote Focus Keyphase value', $i->grabValueFrom('#focus-keyword-input-metabox'));
     }
 
     /**
@@ -105,7 +101,7 @@ class PostMetaboxTabCest
         $i->click('.nux-dot-tip__disable');
 
         // set canonical value
-        $i->executeJS("jQuery('.wpseo-metabox-sidebar > ul > li:nth-child(3)').find('a').trigger('click')");
+        $i->click('#wpseo-collapsible-advanced-settings-button');
         $i->wait(1);
         $i->fillField('#yoast_wpseo_canonical', 'https://inpsyde.com');
 
@@ -120,7 +116,7 @@ class PostMetaboxTabCest
 
         // go to site 2 and check focus keyphase
         $i->amOnPage('/site2/wp-admin/post.php?post=1&action=edit');
-        $i->executeJS("jQuery('.wpseo-metabox-sidebar > ul > li:nth-child(3)').find('a').trigger('click')");
+        $i->click('#wpseo-collapsible-advanced-settings-button');
         $i->wait(1);
         $i->assertEquals('https://remote-inpsyde.com', $i->grabValueFrom('#yoast_wpseo_canonical'));
     }

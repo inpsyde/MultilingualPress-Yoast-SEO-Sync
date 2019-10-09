@@ -21,7 +21,7 @@ class PluginCest
 
     public function pluginIsActivatedCorrectly(CodeCeptionTester $i)
     {
-        $i->deactivatePluginNetwork('multilingualpress-yoast-seo-sync');
-        $i->activatePluginNetwork('multilingualpress-yoast-seo-sync');
+        $i->deactivatePluginNetwork('multilingualpress-3-yoast-seo-sync');
+        $i->activatePluginNetwork('multilingualpress-3-yoast-seo-sync');
     }
 }
