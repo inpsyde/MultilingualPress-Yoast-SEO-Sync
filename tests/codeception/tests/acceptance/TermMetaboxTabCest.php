@@ -52,15 +52,4 @@ class TermMetaboxTabCest
         $i->seeInField('#multilingualpress-site-2-yoast_wpseo_metadesc', 'Some description here');
         $i->seeInField('#multilingualpress-site-2-yoast_wpseo_canonical', 'http://canonic.al');
     }
-
-    public function allowHtmlTagsInTermDescription()
-    {
-        // Create a post category and in the description create an H1 tag title.
-
-        // Connect it to another site through MLP translation Metabox.
-
-        // Once connected, edit category in the remote site, click update button.
-
-        // Go back to source site edit category.
-    }
 }
