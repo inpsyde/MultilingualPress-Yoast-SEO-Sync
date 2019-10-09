@@ -76,6 +76,10 @@ class MetaDescription
      */
     private function value(RelationshipContext $relationshipContext): string
     {
-        return $this->repository->optionByContext($relationshipContext, 'wpseo_desc');
+        try {
+            return $this->repository->optionByContext($relationshipContext, 'wpseo_desc');
+        } catch (\DomainException $exception) {
+            return '';
+        }
     }
 }

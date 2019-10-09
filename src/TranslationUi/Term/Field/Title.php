@@ -77,6 +77,10 @@ class Title
      */
     private function value(RelationshipContext $relationshipContext): string
     {
-        return $this->repository->optionByContext($relationshipContext, 'wpseo_title');
+        try {
+            return $this->repository->optionByContext($relationshipContext, 'wpseo_title');
+        } catch (\DomainException $exception) {
+            return '';
+        }
     }
 }
