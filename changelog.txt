@@ -1,3 +1,6 @@
+2019-10-16 - version 2.1.2
+* Fix: Fatal error: Uncaught DomainException: Empty Term. See (#9)[https://github.com/inpsyde/MultilingualPress-Yoast-SEO-Sync/issues/9].
+
 2019-09-26 - version 2.1.1
 * Add: Check for class existence in autoload, it makes possible being required from composer.
 
