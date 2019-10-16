@@ -76,6 +76,10 @@ class FocusKeyphrase
      */
     private function value(RelationshipContext $relationshipContext): string
     {
-        return $this->repository->optionByContext($relationshipContext, 'wpseo_focuskw');
+        try {
+            return $this->repository->optionByContext($relationshipContext, 'wpseo_focuskw');
+        } catch (\DomainException $exception) {
+            return '';
+        }
     }
 }

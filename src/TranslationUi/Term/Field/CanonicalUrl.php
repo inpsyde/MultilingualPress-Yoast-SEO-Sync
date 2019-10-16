@@ -77,6 +77,10 @@ class CanonicalUrl
      */
     private function value(RelationshipContext $relationshipContext): string
     {
-        return $this->repository->optionByContext($relationshipContext, 'wpseo_canonical');
+        try {
+            return $this->repository->optionByContext($relationshipContext, 'wpseo_canonical');
+        } catch (\DomainException $exception) {
+            return '';
+        }
     }
 }

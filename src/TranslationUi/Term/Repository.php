@@ -24,9 +24,12 @@ class Repository
      * @return string
      * @throws \DomainException
      */
-    public function optionByContext(RelationshipContext $relationshipContext, string $optionKey): string
-    {
-        if(!$optionKey) {
+    public function optionByContext(
+        RelationshipContext $relationshipContext,
+        string $optionKey
+    ): string {
+
+        if (!$optionKey) {
             throw new \InvalidArgumentException('Option key cannot be empty.');
         }
 
@@ -36,7 +39,7 @@ class Repository
         }
 
         $term = get_term($relationshipContext->remoteTermId());
-        if($term instanceof \WP_Error) {
+        if ($term instanceof \WP_Error) {
             /** @var \WP_Error $term */
             throw new \DomainException($term->get_error_message());
         }
