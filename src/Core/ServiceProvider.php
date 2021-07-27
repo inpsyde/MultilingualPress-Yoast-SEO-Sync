@@ -30,7 +30,9 @@ final class ServiceProvider implements MlpServiceProvider
     {
         $container->shareValue(
             PluginProperties::class,
-            new PluginProperties(WP_PLUGIN_DIR. '/MultilingualPress-Yoast-SEO-Sync/multilingualpress-yoast-seo-sync.php')
+            new PluginProperties(
+                WP_PLUGIN_DIR. '/MultilingualPress-Yoast-SEO-Sync/multilingualpress-yoast-seo-sync.php'
+            )
         );
     }
 }
