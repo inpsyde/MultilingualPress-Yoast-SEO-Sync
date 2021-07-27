@@ -10,15 +10,15 @@
  * Domain Path: /languages/
  * License: GPLv2+
  * Network: true
- * Requires at least: 4.8
- * Requires PHP: 7.0
+ * Requires at least: 5.0
+ * Requires PHP: 7.2
  */
 
 namespace Inpsyde\MultilingualPress\YoastSeoSync;
 
 use Inpsyde\MultilingualPress\Framework\Service\ServiceProvidersCollection;
 
-if (version_compare(PHP_VERSION, '7', '<')) {
+if (version_compare(PHP_VERSION, '7.2', '<')) {
     $hooks = [
         'admin_notices',
         'network_admin_notices',

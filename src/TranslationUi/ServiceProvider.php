@@ -57,9 +57,11 @@ final class ServiceProvider implements BootstrappableServiceProvider
 
     /**
      * @inheritdoc
+     * phpcs:disable Inpsyde.CodeQuality.FunctionLength.TooLong
      */
     public function bootstrap(Container $container)
     {
+        // phpcs:enable
         $postMetaboxFields = $container[PostMetaboxFields::class];
 
         add_filter(
