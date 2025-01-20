@@ -3,12 +3,11 @@
  * Plugin Name: MultilingualPress 3 Yoast SEO Sync
  * Plugin URI:
  * Description: Translate Yoast SEO post metadata between translated posts.
- * Author: Inpsyde GmbH
- * Author URI: https://inpsyde.com
+ * Author: Syde GmbH
+ * Author URI: https://syde.com
  * Version: 2.1.2
  * Text Domain: multilingualpress-yoast-seo-sync
  * Domain Path: /languages/
- * License: GPLv2+
  * Network: true
  * Requires at least: 5.0
  * Requires PHP: 7.2
