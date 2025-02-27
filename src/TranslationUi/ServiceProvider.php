@@ -38,7 +38,7 @@ final class ServiceProvider implements BootstrappableServiceProvider
     /**
      * @inheritdoc
      */
-    public function register(Container $container)
+    public function register(Container $container): void
     {
         $container->addService(
             PostMetaboxFields::class,
@@ -59,7 +59,7 @@ final class ServiceProvider implements BootstrappableServiceProvider
      * @inheritdoc
      * phpcs:disable Inpsyde.CodeQuality.FunctionLength.TooLong
      */
-    public function bootstrap(Container $container)
+    public function bootstrap(Container $container): void
     {
         // phpcs:enable
         $postMetaboxFields = $container[PostMetaboxFields::class];
