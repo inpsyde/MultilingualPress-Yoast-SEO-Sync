@@ -26,7 +26,7 @@ final class ServiceProvider implements MlpServiceProvider
     /**
      * @inheritdoc
      */
-    public function register(Container $container)
+    public function register(Container $container): void
     {
         $container->shareValue(
             PluginProperties::class,
