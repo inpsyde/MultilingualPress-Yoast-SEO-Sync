@@ -25,13 +25,13 @@ Add multilingualpress plugin to `bin` folder and follow instructions in `tests/c
 
 ## Code Style
 
-MultilingualPress follow [Inpsyde coding standard](https://github.com/inpsyde/php-coding-standards) which are enforced via [`php_codesniffer`](https://packagist.org/packages/squizlabs/php_codesniffer).
+MultilingualPress follow [Syde coding standard](https://github.com/inpsyde/php-coding-standards) which are enforced via [`php_codesniffer`](https://packagist.org/packages/squizlabs/php_codesniffer).
 
 A `phpcs.xml.dist` is available on the repository.
 
 The repository also contains a `PhpStorm.xml` for code styles settings to be imported in PhpStorm IDE.
 
-The  Inpsyde coding standard repository contains information on how to setup PhpStorm to integrate with `phpcs`.
+The  Syde coding standard repository contains information on how to setup PhpStorm to integrate with `phpcs`.
 
 ## Robo Commands
 
